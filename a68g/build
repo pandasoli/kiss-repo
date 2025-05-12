@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+patch -p1 < musl.patch
+
+./configure \
+    --prefix=/usr \
+    --disable-curses \
+		--disable-curl
+
+make
+make DESTDIR="$1" install

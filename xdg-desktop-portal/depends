@@ -1,0 +1,5 @@
+bwrap
+fuse
+gst-plugins-base
+json-glib
+meson make

@@ -1,0 +1,29 @@
+#!/bin/sh -e
+
+meson setup builddir \
+	--prefix=/usr \
+	-Dgst_debug=false \
+	-Dtracer_hooks=false \
+	-Dextra-checks=disabled \
+	-Dglib_debug=disabled \
+	-Dglib_assert=false \
+	-Dglib_checks=false \
+	-Dpoisoning=false \
+	-Dlibunwind=disabled \
+	-Dlibdw=disabled \
+	-Ddbghelp=disabled \
+	-Dbash-completion=disabled \
+	-Ddoc=disabled \
+	-Dexamples=disabled \
+	-Dtests=disabled \
+	-Dbenchmarks=disabled \
+	-Dtools=disabled \
+	-Dintrospection=disabled \
+	-Dnls=disabled \
+	-Dptp-helper=disabled \
+	-Dmemory-alignment=malloc \
+	-Doption-parsing=false \
+	-Dregistry=false
+
+ninja -C builddir
+ninja -C builddir install

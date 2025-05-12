@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+meson setup builddir \
+	--prefix=/usr \
+	-Dsd-bus-provider=basu \
+	-Dsystemd=disabled \
+	-Dman-pages=disabled
+
+ninja -C builddir
+ninja -C builddir install

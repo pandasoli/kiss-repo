@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+meson setup builddir \
+    --prefix=/usr \
+    -Dnobody-user=disabled \
+    -Daudit=disabled \
+    -Dlibcap=disabled
+
+ninja -C builddir
+ninja -C builddir install

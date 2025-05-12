@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+meson setup builddir \
+    --prefix=/usr \
+    -Dflatpak-interfaces=disabled \
+    -Dgeoclue=disabled \
+    -Dgudev=disabled \
+    -Dsystemd=disabled \
+    -Ddocumentation=disabled \
+    -Dtests=disabled \
+    -Dinstalled-tests=false \
+    -Dman-pages=disabled \
+    -Dsandboxed-image-validation=enabled \
+    -Dsandboxed-sound-validation=enabled \
+    -Ddbus-service-dir=/usr/share/dbus-1/services \
+    -Dsystemd-user-unit-dir=no
+
+ninja -C builddir
+ninja -C builddir install

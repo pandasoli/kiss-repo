@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+meson setup builddir \
+    --prefix=/usr \
+    -Dx11=disabled -Dxshm=disabled -Dxvideo=disabled -Dxi=disabled \
+    -Dcdparanoia=disabled -Dlibvisual=disabled -Dtheora=disabled \
+    -Dtremor=disabled -Dvorbis=disabled -Dogg=disabled -Dopus=disabled \
+    -Dgl=disabled -Dgl-graphene=disabled -Dgl-jpeg=disabled -Dgl-png=disabled \
+    -Dadder=disabled -Dcompositor=disabled -Ddebugutils=disabled \
+    -Ddsd=disabled -Doverlaycomposition=disabled -Dsubparse=disabled \
+    -Dtcp=disabled -Dvideotestsrc=disabled \
+    -Ddoc=disabled -Dexamples=disabled -Dtests=disabled -Dtools=disabled \
+    -Dintrospection=disabled -Dnls=disabled \
+    -Daudioconvert=enabled -Daudioresample=enabled -Dvolume=enabled \
+    -Dtypefind=enabled -Dplayback=enabled -Dencoding=enabled \
+    -Dalsa=$(if kiss l alsa-lib >/dev/null; then echo enabled; else echo disabled; fi) \
+    -Dpango=$(if kiss l pango >/dev/null; then echo enabled; else echo disabled; fi)
+
+ninja -C builddir
+ninja -C builddir install
