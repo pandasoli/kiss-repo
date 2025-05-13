@@ -1,3 +1,7 @@
 basu
 inih
+libdrm
+mesa
 meson make
+pipewire
+wayland

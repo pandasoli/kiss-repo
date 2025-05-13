@@ -1,5 +1,9 @@
 bwrap
 fuse
+gdk-pixbuf
+glib
 gst-plugins-base
+gstreamer
 json-glib
 meson make
+pipewire
