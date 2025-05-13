@@ -1,10 +1,12 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 meson setup builddir \
-	--prefix=/usr \
-	-Dsd-bus-provider=basu \
-	-Dsystemd=disabled \
-	-Dman-pages=disabled
+    --prefix=/usr \
+    -Dsd-bus-provider=basu \
+    -Dsystemd=disabled \
+    -Dman-pages=disabled
 
 ninja -C builddir
 ninja -C builddir install
