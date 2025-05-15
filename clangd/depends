@@ -1,4 +1,4 @@
-clangd
+clang
 cmake make
 llvm
 zlib
