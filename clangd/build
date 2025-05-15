@@ -6,26 +6,21 @@ cd llvm
 patch -p1 < ../musl-stack-size.patch
 
 cmake -S llvm -B build \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DLLVM_BUILD_LLVM_DYLIB=ON \
-		-DLLVM_LINK_LLVM_DYLIB=ON \
-		-DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
-		-DLLVM_ENABLE_RTTI=ON \
-		-DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
-		-DLLVM_INCLUDE_BENCHMARKS=OFF \
-		-DLLVM_INCLUDE_EXAMPLES=OFF \
-		-DLLVM_INCLUDE_DOCS=OFF \
-		-DLLVM_INCLUDE_TESTS=OFF \
-		-DLLVM_ENABLE_LIBXML2=OFF \
-		-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" \
-		-Wno-dev
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_BUILD_LLVM_DYLIB=ON \
+    -DLLVM_LINK_LLVM_DYLIB=ON \
+    -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+    -DLLVM_ENABLE_RTTI=ON \
+    -DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF \
+    -DLLVM_INCLUDE_EXAMPLES=OFF \
+    -DLLVM_INCLUDE_DOCS=OFF \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DLLVM_ENABLE_LIBXML2=OFF \
+    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" \
+    -Wno-dev
 
 cmake --build build --target clangd
-
-# 'cmake --install build' doesn't install libs.
-mkdir -p "$DESTDIR/bin" "$DESTDIR/lib"
-
-cp build/bin/clangd          "$DESTDIR/bin"
-cp build/lib/libLLVM.so      "$DESTDIR/lib/libLLVM.so.20.1"
-cp build/lib/libclang-cpp.so "$DESTDIR/lib/libclang-cpp.so.20.1"
+cmake --install build
