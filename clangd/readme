@@ -1,0 +1,27 @@
+clangd
+________________________________________________________________________________
+
+If you do not want to depend on llvm and clang add this patch:
+```diff
+--- clangd/build.orig
++++ clangd/build
+@@ -17,4 +17,8 @@
+     -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" \
+     -Wno-dev
+ 
+-cmake --install build
++cmake --build build --target clangd
++
++mkdir -p "$DESTDIR/bin" "$DESTDIR/lib"
++
++cp build/bin/clangd          "$DESTDIR/bin"
++cp build/lib/libLLVM.so      "$DESTDIR/lib/libLLVM.so.20.1"
++cp build/lib/libclang-cpp.so "$DESTDIR/lib/libclang-cpp.so.20.1"
+--- clangd/depends.orig
++++ clangd/depends
+@@ -1 +1,4 @@
++clangd
+ cmake make
++llvm
++zlib
+```
