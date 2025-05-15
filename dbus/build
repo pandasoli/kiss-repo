@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson setup builddir \
+    --prefix=/usr \
+    -Dbuildtype=release \
+    -Dsystem_pid_file=/run/dbus/pid \
+    -Dchecks=false \
+    -Ddoxygen_docs=disabled \
+    -Dducktype_docs=disabled \
+    -Dqt_help=disabled
+
+ninja -C builddir
+ninja -C builddir install
