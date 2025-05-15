@@ -1,2 +1,5 @@
+glib
 gstreamer
+libdrm
 meson make
+zlib
