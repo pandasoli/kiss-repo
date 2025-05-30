@@ -1,0 +1,36 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson setup \
+    --prefix=/usr \
+    --libdir=/usr/lib \
+    --buildtype=plain \
+    --auto-features=disabled \
+    -Ddaemon=false \
+    -Dclient=true \
+    -Ddoxygen=false \
+    -Dtests=false \
+    -Dman=false \
+    -Ddatabase=simple \
+    -Dalsa=disabled \
+    -Djack=disabled \
+    -Dbluez5=disabled \
+    -Ddbus=disabled \
+    -Dsystemd=disabled \
+    -Dudev=disabled \
+    -Dgsettings=disabled \
+    -Dwebrtc-aec=disabled \
+    -Dorc=disabled \
+    build
+
+ninja -C build
+ninja -C build install
+
+rm -rf "$1/usr/bin"
+rm -rf "$1/usr/share"
+rm -rf "$1/usr/include/pulse/extra"
+rm -rf "$1/usr/lib/pkgconfig"
+rm -rf "$1/usr/lib/systemd"
+
+find "$1/usr/lib" -name '*.a' -delete
