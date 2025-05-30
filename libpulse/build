@@ -30,7 +30,5 @@ ninja -C build install
 rm -rf "$1/usr/bin"
 rm -rf "$1/usr/share"
 rm -rf "$1/usr/include/pulse/extra"
-rm -rf "$1/usr/lib/pkgconfig"
 rm -rf "$1/usr/lib/systemd"
-
 find "$1/usr/lib" -name '*.a' -delete
